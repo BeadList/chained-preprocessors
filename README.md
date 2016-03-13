@@ -28,7 +28,7 @@ Usage
 -----
 
 ```js
-  var chainedPreprocessors = require(chained-preprocessors');
+  var chainedPreprocessors = require('chained-preprocessors');
   var options = {
     all: {
       user: 'Bill Murray'
