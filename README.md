@@ -80,7 +80,7 @@ $primary-color: <%= primaryColor %>
     .renderFile('styles.css.scss.ejs', options, function(err, html){
     console.log(html);
   });
-``
+```
 
 Will result in:
 
