@@ -36,14 +36,18 @@ Usage
   };
 
   chainedPreprocessors
-    .renderFile('./pages/index.md.hbs', options, function(err, html){
+    .renderFile('./pages/index.md.hbs', options, function (err, html){
       console.log(html);
     });
 
-  chainedPreprocessors
-    .renderFile('styles.css.sass.ejs', function(err, html){
+  // Or pass contents of file, and file extensions ordered by related
+  // preprocessor to be used i.e. for same file:
+
+    chainedPreprocessors
+    .renderFile(fileContents, ['hbs, 'md'], options, function (err, html) {
       console.log(html);
     });
+
 ```
 
 Right now options will be passed to all preprocessors, later on though, I hope
@@ -77,7 +81,7 @@ $primary-color: <%= primaryColor %>
   };
 
   chainedPreprocessors
-    .renderFile('styles.css.scss.ejs', options, function(err, html){
+    .renderFile('styles.css.scss.ejs', options, function (err, html) {
     console.log(html);
   });
 ```
