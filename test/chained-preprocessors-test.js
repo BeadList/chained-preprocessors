@@ -14,7 +14,6 @@ describe('chainedPreprocessors', () => {
     it('runs all prerpocessors', (done) => {
       chainedPreprocessors
         .render(mdHbs, ['hbs', 'md'], options, (err, html) => {
-          console.log(err);
           expect(html).to.equal('<h1>Hello</h1>\n<p>Bazinga</p>\n');
           done();
         });

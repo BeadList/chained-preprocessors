@@ -15,11 +15,19 @@ let handlers =  {
   markdown(contents, options, cb) {
     commonmark = commonmark || require('commonmark');
     try {
-      console.log(contents);
       let reader = new commonmark.Parser();
       let writer = new commonmark.HtmlRenderer();
       let parsed = reader.parse(contents);
       cb(null, writer.render(parsed));
+    } catch (err) {
+      cb(err, null);
+    }
+  },
+
+  coffeescript(contents, options, cb) {
+    let coffeeScript = coffeeScript || require('coffee-script');
+    try {
+      cb(null, coffeeScript.compile(contents, options));
     } catch (err) {
       cb(err, null);
     }
