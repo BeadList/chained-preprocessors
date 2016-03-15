@@ -2,7 +2,8 @@
 
 let consolidate = undefined;
 let commonmark = undefined;
-
+let sass = undefined;
+let coffeeScript = undefined;
 let handlers =  {
   consolidate(engine) {
     consolidate = consolidate || require('consolidate');
@@ -24,10 +25,28 @@ let handlers =  {
     }
   },
 
+
   coffeescript(contents, options, cb) {
-    let coffeeScript = coffeeScript || require('coffee-script');
+    coffeeScript = coffeeScript || require('coffee-script');
     try {
       cb(null, coffeeScript.compile(contents, options));
+    } catch (err) {
+      cb(err, null);
+    }
+  },
+
+
+  sass(contents, options, cb) {
+    sass = sass || require('node-sass');
+    let newOptions = Object.assign({
+      indentedSyntax: true,
+      data: contents
+    });
+
+    try {
+      sass.render(newOptions, function(err, obj){
+        cb(err, obj.css.toString());
+      });
     } catch (err) {
       cb(err, null);
     }
