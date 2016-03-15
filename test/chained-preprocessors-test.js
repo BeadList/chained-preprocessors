@@ -8,13 +8,14 @@ describe('chainedPreprocessors', () => {
     =====
 
     {{ title }}
-  `;
+  `.replace(/\n {2}/g,'\n');
   let options = { all: { title: 'Bazinga' } };
   describe('.render', () => {
     it('runs all prerpocessors', (done) => {
       chainedPreprocessors
         .render(mdHbs, ['hbs', 'md'], options, (err, html) => {
-          expect(html).to.equal(`<h1>Hello</h1>`);
+          console.log(err);
+          expect(html).to.equal('<h1>Hello</h1>\n<p>Bazinga</p>\n');
           done();
         });
     });
@@ -28,7 +29,7 @@ describe('chainedPreprocessors', () => {
           =====
 
           Bazinga
-        `).replace(/\n {6}/g,'\n'));
+        `).replace(/\n {8}/g,'\n'));
         done();
       });
     });

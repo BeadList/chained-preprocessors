@@ -24,7 +24,8 @@ let chainedPreprocessors = {
   },
 
   extensionsMap: {
-    hbs: { engine:'handlebars', type: 'html', handler: handlers.consolidate('handlebars') }
+    hbs: { engine:'handlebars', type: 'html', handler: handlers.consolidate('handlebars') },
+    md: { engine:'markdown', type: 'html', handler: handlers.markdown }
   }
 };
 
