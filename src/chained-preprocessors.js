@@ -1,14 +1,6 @@
-/*global module, require */
+/*global module */
 
-let consolidate = undefined;
-
-let consolidateHandler = (engine) => {
-  consolidate = consolidate || require('consolidate');
-  return ((engine) => {
-    return (contents, options, cb) => {
-      consolidate[engine].render(contents, options, cb);
-    };})(engine);
-};
+import handlers from './handlers';
 
 let chainedPreprocessors = {
   render(contents, extensions, options, cb) {
@@ -32,7 +24,7 @@ let chainedPreprocessors = {
   },
 
   extensionsMap: {
-    hbs: { engine:'handlebars', type: 'html', handler: consolidateHandler('handlebars') }
+    hbs: { engine:'handlebars', type: 'html', handler: handlers.consolidate('handlebars') }
   }
 };
 
