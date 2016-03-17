@@ -90,7 +90,7 @@ Will result in:
 
 ```css
 .header {
-  background: red
-  font-weight: bold
+  background: red;
+  font-weight: bold;
 }
 ```
