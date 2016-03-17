@@ -44,7 +44,7 @@ Usage
   // preprocessor to be used i.e. for same file:
 
     chainedPreprocessors
-    .renderFile(fileContents, ['hbs', 'md'], options, function (err, html) {
+    .render(fileContents, ['hbs', 'md'], options, function (err, html) {
       console.log(html);
     });
 
