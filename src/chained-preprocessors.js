@@ -1,5 +1,8 @@
 /*global module */
 
+import fs from 'fs';
+import path from 'path';
+
 import handlers from './handlers';
 
 let chainedPreprocessors = {
@@ -16,6 +19,19 @@ let chainedPreprocessors = {
       }
       let newExtensions = extensions.slice(1, extensions.length);
       this.render(newContents, newExtensions, options, cb);
+    });
+  },
+
+  renderFile(file, options, cb) {
+    fs.readFile(file, (err, data) => {
+      if (err) {
+        cb(err);
+        return;
+      }
+      let allExtensions = path.basename(file).split('.').reverse();
+      let extensions = allExtensions.slice(0, allExtensions.length - 2);
+
+      this.render(data.toString(), extensions, options, cb);
     });
   },
 

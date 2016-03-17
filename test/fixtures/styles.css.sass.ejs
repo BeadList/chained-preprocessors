@@ -1,0 +1,8 @@
+$primary-color: <%= primaryColor %>
+
+.header
+  background: $primary-color;
+<% if (environment === 'development') { %>
+  font-weight: bold;
+<% } %>
+
