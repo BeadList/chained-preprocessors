@@ -66,7 +66,7 @@ $primary-color: <%= primaryColor %>
 
 .header {
   background: $primary-color;
-  <% if (environment === 'development' { %>
+  <% if (environment === 'development') { %>
     font-weight: bold;
   <% } %>
 }

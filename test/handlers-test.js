@@ -41,7 +41,6 @@ describe('handlers', () => {
   describe('.sass', () => {
     it('renders', (done) => {
       handlers.sass(sass, options, (err, css) => {
-        console.log(err);
         expect(css).to.equal('.main {\n  border: blue; }\n');
         done();
       });
