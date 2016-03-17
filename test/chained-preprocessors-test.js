@@ -2,7 +2,6 @@
 
 import { expect } from 'chai';
 import chainedPreprocessors from '../src/chained-preprocessors';
-
 describe('chainedPreprocessors', () => {
   let mdHbs = `
     Hello
@@ -18,6 +17,8 @@ describe('chainedPreprocessors', () => {
       environment: 'development'
     }
   };
+  let stylesPath = __dirname + '/fixtures/styles.css.sass.ejs';
+
   describe('.render', () => {
     it('runs all prerpocessors', (done) => {
       chainedPreprocessors
@@ -30,9 +31,8 @@ describe('chainedPreprocessors', () => {
 
   describe('.renderFile', () => {
     it('runs all prerpocessors', (done) => {
-      let styles = __dirname + '/fixtures/styles.css.sass.ejs';
       chainedPreprocessors
-        .renderFile(styles, options, (err, css) => {
+        .renderFile(stylesPath, options, (err, css) => {
           expect(css).to
             .equal('.header {\n  background: red;\n  font-weight: bold; }\n');
           done();
@@ -51,6 +51,20 @@ describe('chainedPreprocessors', () => {
         `).replace(/\n {8}/g,'\n'));
         done();
       });
+    });
+  });
+
+  describe('.extensionsToPreprocess', () => {
+    it('returns array of extensions with one in reverse order', () => {
+      var extensions = chainedPreprocessors.extensionsToPreprocess(stylesPath);
+      expect(extensions).to.deep.equal(['ejs', 'sass']);
+    });
+  });
+
+  describe('.preprocessedName', () => {
+    it('returns clean name after preprocessing', () => {
+      let name =  chainedPreprocessors.preprocessedName(stylesPath);
+      expect(name).to.equal(__dirname + '/fixtures/styles.css');
     });
   });
 });

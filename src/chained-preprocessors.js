@@ -28,15 +28,22 @@ let chainedPreprocessors = {
         cb(err);
         return;
       }
-      let allExtensions = path.basename(file).split('.').reverse();
-      let extensions = allExtensions.slice(0, allExtensions.length - 2);
-
+      let extensions = this.extensionsToPreprocess(file);
       this.render(data.toString(), extensions, options, cb);
     });
   },
 
   renderOne(contents, extension, options, cb) {
     this.extensionsMap[extension].handler(contents, options.all, cb);
+  },
+
+  extensionsToPreprocess(file) {
+    let allExtensions = path.basename(file).split('.').reverse();
+    return allExtensions.slice(0, allExtensions.length - 2);
+  },
+
+  preprocessedName(file) {
+    return file.replace(/(\.[^.]+)\..+/,'$1');
   },
 
   extensionsMap: {
