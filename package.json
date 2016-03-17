@@ -1,8 +1,8 @@
 {
   "name": "chained-preprocessors",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "",
-  "main": "dest/chained-preprocessors.js",
+  "main": "dist/chained-preprocessors.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

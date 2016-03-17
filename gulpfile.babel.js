@@ -5,7 +5,7 @@ import mocha from 'gulp-mocha';
 gulp.task('build', () => {
   gulp.src(['src/**/*.js'])
     .pipe(babel())
-    .pipe(gulp.dest('dest'));
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('test', function() {
