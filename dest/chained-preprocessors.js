@@ -44,14 +44,19 @@ var chainedPreprocessors = {
         cb(err);
         return;
       }
-      var allExtensions = _path2.default.basename(file).split('.').reverse();
-      var extensions = allExtensions.slice(0, allExtensions.length - 2);
-
+      var extensions = _this2.extensionsToPreprocess(file);
       _this2.render(data.toString(), extensions, options, cb);
     });
   },
   renderOne: function renderOne(contents, extension, options, cb) {
     this.extensionsMap[extension].handler(contents, options.all, cb);
+  },
+  extensionsToPreprocess: function extensionsToPreprocess(file) {
+    var allExtensions = _path2.default.basename(file).split('.').reverse();
+    return allExtensions.slice(0, allExtensions.length - 2);
+  },
+  preprocessedName: function preprocessedName(file) {
+    return file.replace(/(\.[^.]+)\..+/, '$1');
   },
 
 
