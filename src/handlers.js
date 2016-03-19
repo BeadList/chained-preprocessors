@@ -45,6 +45,10 @@ let handlers =  {
 
     try {
       sass.render(newOptions, function(err, obj){
+        if (err) {
+          cb(err, null);
+          return;
+        }
         cb(err, obj.css.toString());
       });
     } catch (err) {
