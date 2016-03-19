@@ -49,7 +49,8 @@ var chainedPreprocessors = {
     });
   },
   renderOne: function renderOne(contents, extension, options, cb) {
-    this.extensionsMap[extension].handler(contents, options.all, cb);
+    var newOptions = Object.assign({}, options.all, options[extension]);
+    this.extensionsMap[extension].handler(contents, newOptions, cb);
   },
   extensionsToPreprocess: function extensionsToPreprocess(file) {
     var allExtensions = _path2.default.basename(file).split('.').reverse();
