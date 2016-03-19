@@ -34,7 +34,8 @@ let chainedPreprocessors = {
   },
 
   renderOne(contents, extension, options, cb) {
-    this.extensionsMap[extension].handler(contents, options.all, cb);
+    let newOptions = Object.assign({}, options.all, options[extension]);
+    this.extensionsMap[extension].handler(contents, newOptions, cb);
   },
 
   extensionsToPreprocess(file) {

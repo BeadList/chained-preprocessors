@@ -3,12 +3,18 @@
 import { expect } from 'chai';
 import chainedPreprocessors from '../src/chained-preprocessors';
 describe('chainedPreprocessors', () => {
-  let mdHbs = `
+  let mdHbs =(`
     Hello
     =====
 
     {{ title }}
+  `).replace(/\n {2}/g,'\n');
+
+  let hbsEjs = `
+    <%= title %>
+    {{ title }}
   `.replace(/\n {2}/g,'\n');
+
   let options = {
     all:
     {
@@ -48,6 +54,20 @@ describe('chainedPreprocessors', () => {
           =====
 
           Bazinga
+        `).replace(/\n {8}/g,'\n'));
+        done();
+      });
+    });
+
+    it('uses preprocessor specific options', (done) => {
+      let options = {
+        hbs: { title: 'HBS' },
+        ejs: { title: 'EJS' }
+      };
+      chainedPreprocessors.renderOne(hbsEjs, 'hbs', options, (err, html) => {
+        expect(html).to.equal((`
+          <%= title %>
+          HBS
         `).replace(/\n {8}/g,'\n'));
         done();
       });
