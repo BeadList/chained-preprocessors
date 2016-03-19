@@ -38,13 +38,12 @@ let handlers =  {
 
   sass(contents, options, cb) {
     sass = sass || require('node-sass');
-    let newOptions = Object.assign({
-      indentedSyntax: true,
-      data: contents
-    });
+
+    options.indentedSyntax = true;
+    options.data = contents;
 
     try {
-      sass.render(newOptions, function(err, obj){
+      sass.render(options, function(err, obj){
         if (err) {
           cb(err, null);
           return;
