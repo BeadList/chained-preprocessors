@@ -51,6 +51,7 @@ let chainedPreprocessors = {
     ejs:     { engine: 'ejs',          type: 'html', handler: handlers.consolidate('ejs') },
     hbs:     { engine: 'handlebars',   type: 'html', handler: handlers.consolidate('handlebars') },
     jade:    { engine: 'jade',         type: 'html', handler: handlers.consolidate('jade') },
+    pug:    { engine: 'jade',         type: 'html', handler: handlers.consolidate('jade') },
     md:      { engine: 'markdown',     type: 'html', handler: handlers.markdown },
 
     coffee:  { engine: 'coffeescript', type: 'js',   handler: handlers.coffeescript },
