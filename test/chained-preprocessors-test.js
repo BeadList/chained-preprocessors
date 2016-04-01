@@ -89,6 +89,9 @@ describe('chainedPreprocessors', () => {
 
   describe.only('option normalizeHelpers', (done) => {
     const ejs = "<p><%= color('fulvous') %></p>";
+    const pug = "p= color('fulvous')";
+    const hbs = "<p>{{ color 'fulvous' }}</p>";
+
     let options = {
       all: {
         prefix: 'My favorite color is'
@@ -108,7 +111,22 @@ describe('chainedPreprocessors', () => {
     it('normalizes helpers for ejs', (done) => {
       chainedPreprocessors
         .render(ejs, ['ejs'], options, (err, html) => {
-          console.log(err);
+          expect(html).to.equal('<p>My favorite color is fulvous</p>');
+          done();
+        });
+    });
+
+    it('normalizes helpers for pug', (done) => {
+      chainedPreprocessors
+        .render(pug, ['pug'], options, (err, html) => {
+          expect(html).to.equal('<p>My favorite color is fulvous</p>');
+          done();
+        });
+    });
+
+    it('normalizes helpers for hbs', (done) => {
+      chainedPreprocessors
+        .render(hbs, ['hbs'], options, (err, html) => {
           expect(html).to.equal('<p>My favorite color is fulvous</p>');
           done();
         });

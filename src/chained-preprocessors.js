@@ -52,7 +52,16 @@ let chainedPreprocessors = {
 
   normalizeHelpers(config, helpers, extension) {
     Object.keys(helpers).forEach((k) => {
-      config[k] = helpers[k];
+      if(extension === 'hbs') {
+        config[k] = function() {
+          var args = Array.prototype.slice.call(arguments);
+          let extraAgument = args.pop();
+          this.arguments = [extraAgument];
+          return helpers[k].apply(this, args);
+        };
+      } else {
+        config[k] = helpers[k];
+      }
     });
   },
 
