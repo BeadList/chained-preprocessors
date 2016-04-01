@@ -50,6 +50,9 @@ var chainedPreprocessors = {
   },
   renderOne: function renderOne(contents, extension, options, cb) {
     var newOptions = Object.assign({}, options.all, options[extension]);
+    if (options.normalizeHelpers) {
+      this.normalizeHelpers(newOptions, options.helpers, extension);
+    }
     this.extensionsMap[extension].handler(contents, newOptions, cb);
   },
   extensionsToPreprocess: function extensionsToPreprocess(file) {
@@ -58,6 +61,20 @@ var chainedPreprocessors = {
   },
   preprocessedName: function preprocessedName(file) {
     return file.replace(/(\.[^.]+)\..+/, '$1');
+  },
+  normalizeHelpers: function normalizeHelpers(config, helpers, extension) {
+    Object.keys(helpers).forEach(function (k) {
+      if (extension === 'hbs') {
+        config[k] = function () {
+          var args = Array.prototype.slice.call(arguments);
+          var extraAgument = args.pop();
+          this.arguments = [extraAgument];
+          return helpers[k].apply(this, args);
+        };
+      } else {
+        config[k] = helpers[k];
+      }
+    });
   },
 
 
