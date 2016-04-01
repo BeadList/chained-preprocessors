@@ -35,6 +35,9 @@ let chainedPreprocessors = {
 
   renderOne(contents, extension, options, cb) {
     let newOptions = Object.assign({}, options.all, options[extension]);
+    if(options.normalizeHelpers) {
+      this.normalizeHelpers(newOptions, options.helpers, extension);
+    }
     this.extensionsMap[extension].handler(contents, newOptions, cb);
   },
 
@@ -45,6 +48,12 @@ let chainedPreprocessors = {
 
   preprocessedName(file) {
     return file.replace(/(\.[^.]+)\..+/,'$1');
+  },
+
+  normalizeHelpers(config, helpers, extension) {
+    Object.keys(helpers).forEach((k) => {
+      config[k] = helpers[k];
+    });
   },
 
   extensionsMap: {

@@ -1,4 +1,3 @@
-/*global describe it beforeEach Application */
 import { expect } from 'chai';
 import handlers from '../src/handlers';
 

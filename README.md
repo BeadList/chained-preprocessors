@@ -47,7 +47,6 @@ Usage
     .render(fileContents, ['hbs', 'md'], options, function (err, html) {
       console.log(html);
     });
-
 ```
 
 You can specify preprocessor specific options via its key, like this:
@@ -62,6 +61,25 @@ You can specify preprocessor specific options via its key, like this:
       noEscape: true
     }
   };
+```
+Options
+-------
+
+You can normalize helpers - pass context as this to helper functions, as well
+not passing template specific arguments. For that you can use `normalizeHelpers`
+options along with `helpers` object of functions. Template specific arguments
+then can be accessed via `this.arguments`. Also for template engines which do
+not support helpers, functions will be just flatten to the context object.
+
+```js
+{
+  normalizeHelpers: true,
+  helpers: {
+    fullName: (firstName) => {
+       firstName + this.lastName;
+    }
+  }
+}
 ```
 
 Examples
