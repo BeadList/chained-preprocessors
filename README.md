@@ -50,8 +50,19 @@ Usage
 
 ```
 
-Right now options will be passed to all preprocessors, later on though, I hope
-options will be organized by preprocessors.
+You can specify preprocessor specific options via its key, like this:
+
+```js
+  var options = {
+    all: {
+      user: 'Bill Murray',
+    },
+    hbs: {
+      user: 'Tom Hanks,
+      noEscape: true
+    }
+  };
+```
 
 Examples
 --------
