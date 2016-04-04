@@ -87,7 +87,7 @@ describe('chainedPreprocessors', () => {
     });
   });
 
-  describe.only('option normalizeHelpers', (done) => {
+  describe('option normalizeHelpers', (done) => {
     const ejs = "<p><%= color('fulvous') %></p>";
     const pug = "p= color('fulvous')";
     const hbs = "<p>{{ color 'fulvous' }}</p>";
