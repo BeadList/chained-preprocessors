@@ -72,7 +72,11 @@ var chainedPreprocessors = {
           return helpers[k].apply(this, args);
         };
       } else {
-        config[k] = helpers[k];
+        config[k] = function () {
+          var context = this || config;
+          var args = Array.prototype.slice.call(arguments);
+          return helpers[k].apply(context, args);
+        };
       }
     });
   },
